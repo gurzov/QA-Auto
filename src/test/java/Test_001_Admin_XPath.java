@@ -6,7 +6,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.concurrent.TimeUnit;
 
-public class Test_001_Admin {
+public class Test_001_Admin_XPath {
 
     @Test
     public void testLitecartAdminLogin() {
