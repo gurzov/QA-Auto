@@ -8,12 +8,15 @@ import utils.DriverFactory;
 
 import java.util.List;
 
-public class AdminPanel {
+public class AdminPanelPage {
 
     @FindBy(id = "box-apps-menu")
     WebElement sideMenuContainer;
 
-    public AdminPanel() {
+    @FindBy(className = "docs")
+    WebElement insideMenuContainer;
+
+    public AdminPanelPage() {
         PageFactory.initElements(DriverFactory.getDriver(),this);
     }
 
@@ -33,26 +36,31 @@ public class AdminPanel {
         return sideMenuContainer.findElements(By.xpath("//li[contains(@id,'doc-')]"));
     }
 
-    public void clickOnSideMenuItem() {
-        int menuItemsCount1 = getSideMenuContainer().size();
-        WebElement currentMenuItem, currentMenuItem2;
-        for(int i=0; i< menuItemsCount1; i++) {
+    public int getSizeOfList(List<WebElement> list) {
+        return list.size();
+    }
+
+    public void clickAllMenuItems() {
+        WebElement currentMenuItem;
+
+        int menuCounter1 = getSizeOfList(getSideMenuContainer());
+        for(int i=0; i< menuCounter1; i++) {
             currentMenuItem = getSideMenuContainer().get(i);
-            clickOnMenuItem(currentMenuItem);
-            int menuItemsCount2 = getSideMenuContainer2().size();
-            if (menuItemsCount2 > 0) {
-                for (int j = 0; j < menuItemsCount2; j++) {
-                    currentMenuItem2 = getSideMenuContainer2().get(j);
-                    clickOnMenuItem(currentMenuItem2);
+            currentMenuItem.click();
+            int menuCounter2 = getSizeOfList(getSideMenuContainer2());
+            if (menuCounter2 > 0) {
+                for (int j = 0; j < menuCounter2; j++) {
+                    currentMenuItem = getSideMenuContainer2().get(j);
+                    currentMenuItem.click();
                 }
             }
         }
-    }
+     }
 
-    private void clickOnMenuItem(WebElement menuItem) {
+    public AdminPanelPage clickOneMenuItem(WebElement menuItem) {
         System.out.println(menuItem.getText());
         menuItem.click();
-
+        return this;
     }
 
 }
