@@ -21,12 +21,23 @@ public class LitecartMainPage {
         PageFactory.initElements(DriverFactory.getDriver(),this);
     }
 
-    public boolean listOfImagesWithStikersIsNotEmpty() {
+    public boolean listOfImagesWithStickersIsNotEmpty() {
         return !getContentImagesContainer().isEmpty();
     }
 
-    public int listOfImagesWithStikersSize() {
+    public int listOfImagesWithStickersSize() {
         return getContentImagesContainer().size();
     }
 
+    public boolean campaignPriceIsPresentedForEachSaleSticker() {
+        WebElement currentSaleSticker, currentSalePrice;
+        List<WebElement> contentSaleImagesContainer =
+                DriverFactory.getDriver().findElements(By.xpath("//*[@class='product column shadow hover-light']"));
+        for (WebElement currentSaleImageContainer: contentSaleImagesContainer) {
+            currentSaleSticker = currentSaleImageContainer.findElement(By.xpath("//*[@class='sticker sale']"));
+            currentSalePrice = currentSaleImageContainer.findElement(By.xpath("//*[@class='campaign-price']"));
+            if (!(currentSaleSticker.isDisplayed() && currentSalePrice.isDisplayed())) return false;
+        }
+        return true;
+    }
 }
