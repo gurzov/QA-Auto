@@ -12,13 +12,18 @@ public class Test_005_StikersOnMainPage {
         }
 
         @Test
-        public void findImagesWithStikersOnMainPage() {
-            Assert.assertTrue(new LitecartMainPage().listOfImagesWithStikersIsNotEmpty());
+        public void findImagesWithStickersOnMainPage() {
+            Assert.assertTrue(new LitecartMainPage().listOfImagesWithStickersIsNotEmpty());
         }
 
         @Test
         public void checkCountOfImagesWithStikersOnMainPage() {
-            Assert.assertTrue(new LitecartMainPage().listOfImagesWithStikersSize() > 1);
+            Assert.assertTrue(new LitecartMainPage().listOfImagesWithStickersSize() > 1);
+        }
+
+        @Test
+        public void checkAllSaleStickersShowSalePrice() {
+            Assert.assertTrue(new LitecartMainPage().campaignPriceIsPresentedForEachSaleSticker());
         }
 
         @After
